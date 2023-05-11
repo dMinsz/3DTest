@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class move : MonoBehaviour
+public class PlayerMove: MonoBehaviour
 {
     [SerializeField]
     public float jumpSpeed = 5.0f;
@@ -24,6 +24,7 @@ public class move : MonoBehaviour
     void Start()
     {
         rgd = GetComponent<Rigidbody>();
+        name = "Player";
     }
 
     // Update is called once per frame
@@ -45,7 +46,7 @@ public class move : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && IsJump)
         {
-            Debug.Log(IsJump + " 점프상태");
+            Debug.Log(name + "이 점프상태");
             rgd.AddForce(Vector3.up * jumpSpeed ,ForceMode.Impulse);
             IsJump = false;
         }
@@ -55,7 +56,7 @@ public class move : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            Debug.Log("땅에닿았다.");
+            Debug.Log(name + "이 땅에닿았다.");
             IsJump = true;
         }
     }
