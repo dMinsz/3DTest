@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class PlayerMove: MonoBehaviour
@@ -49,6 +51,7 @@ public class PlayerMove: MonoBehaviour
             Debug.Log(name + "이 점프상태");
             rgd.AddForce(Vector3.up * jumpSpeed ,ForceMode.Impulse); //점프 를 한다.
             IsJump = false;
+
         }
     }
 

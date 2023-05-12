@@ -19,7 +19,7 @@ public class JumpOnece : MonoBehaviour
     {
         if (IsJump)
         {
-            Debug.Log(name + "이 점프상태");
+            //Debug.Log(name + "이 점프상태");
             rgd.AddForce(Vector3.up * JumpPower, ForceMode.Impulse);
             IsJump = false;
         }
@@ -29,7 +29,7 @@ public class JumpOnece : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            Debug.Log(name+"이 땅에닿았다.");
+            //Debug.Log(name+"이 땅에닿았다.");
             IsJump = true;
         }
     }
