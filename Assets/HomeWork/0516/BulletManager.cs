@@ -29,11 +29,15 @@ public class BulletManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        gameObject.SetActive(false);
+
         var audio = GetComponent<AudioSource>();
-        audio.PlayOneShot(ExplosiveSound);
+        audio.clip = ExplosiveSound;
+        audio.Play();
+
 
         var obj = Instantiate(ExplosionEffect, transform.position, transform.rotation);
         Destroy(obj, 1f);
-        Destroy(gameObject);     
+        Destroy(gameObject,1f);     
     }
 }
