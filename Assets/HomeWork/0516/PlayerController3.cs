@@ -11,7 +11,7 @@ using UnityEngine.UIElements;
 using UnityEngine.Windows;
 using static UnityEngine.GraphicsBuffer;
 
-public class PlayerController2: MonoBehaviour
+public class PlayerController3: MonoBehaviour
 {
     private enum STATE { None, Jump, Move }
 
@@ -33,7 +33,8 @@ public class PlayerController2: MonoBehaviour
     public float JumpPower = 5.0f;
     public float RepeatTime = 1.0f;
 
-
+    private Vector3 orgBackCam;
+    private bool ChangeCam = false;
     IEnumerator FireRoutine()
     {
         while (true)
@@ -105,15 +106,10 @@ public class PlayerController2: MonoBehaviour
 
     private void OnFire(InputValue input) 
     {
-        //if (isFire)
-        //{
-        //    isFire = false;
-
-            Transform shoot = transform.Find("Tank").Find("TankRenderers").Find("TankTurret").Find("ShootPosition");
-            GameObject obj = Instantiate(BulletFrepab, shoot.position , shoot.rotation);
-        //}
-        //StartCoroutine(FireRoutine());
+        Transform shoot = transform.Find("Tank").Find("TankRenderers").Find("TankTurret").Find("ShootPosition");
+        GameObject obj = Instantiate(BulletFrepab, shoot.position , shoot.rotation);
     }
+
     private void OnRepeatFire(InputValue input) 
     {
         if (input.isPressed)
@@ -126,17 +122,34 @@ public class PlayerController2: MonoBehaviour
         }
     }
 
-    private void OnRotateTurret(InputValue input)
+    private void OnFocus(InputValue input)
     {
-        Vector3  targetPosition = new Vector3(input.Get<Vector2>().x, 0, input.Get<Vector2>().y);
+        if (!ChangeCam)
+        {
+            Transform shot = transform.Find("ShotPos").transform;
+            Camera cam = transform.Find("BackCamera").GetComponent<Camera>();
+            orgBackCam = cam.transform.localPosition;
+            cam.transform.localPosition = shot.localPosition;
+            ChangeCam = true;
 
-        Vector3 aimVector = targetPosition - tankTurret.transform.position;
+        }
+        else 
+        {
+            //Transform shot = transform.Find("ShotPos").transform;
+            Camera cam = transform.Find("BackCamera").GetComponent<Camera>();
+            cam.transform.localPosition = orgBackCam;
+            ChangeCam = false;
 
-        aimVector.y = 0.0f;
-        Quaternion newRotation = Quaternion.LookRotation(aimVector,Vector3.up);
-        tankTurret.transform.rotation = Quaternion.Slerp(tankTurret.transform.rotation, newRotation,10000);
+        }
 
     }
+
+
+    private void OnRotateTurret(InputValue input)
+    {
+    }
+
+
 
     private void OnCollisionEnter(Collision collision)
     {

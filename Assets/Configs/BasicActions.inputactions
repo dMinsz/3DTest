@@ -43,9 +43,9 @@
                 },
                 {
                     "name": "RotateTurret",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "8d1b8cb1-0d56-4779-b52f-e50076afb0c7",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -54,6 +54,15 @@
                     "name": "RepeatFire",
                     "type": "PassThrough",
                     "id": "1c6ad330-8555-4d3b-ba57-2be99faaf594",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Focus",
+                    "type": "Button",
+                    "id": "63f1d253-ef86-45d6-a8f6-825a2959aae4",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -206,12 +215,34 @@
                 },
                 {
                     "name": "",
-                    "id": "9975720c-ba39-4e19-9910-67a9749945a8",
-                    "path": "<Mouse>/position",
+                    "id": "5f62421a-a89b-4b0c-a0e7-f64271786b2b",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "RotateTurret",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7a3e987b-a64a-48fa-b0df-66296dde82aa",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateTurret",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "481c2dcc-93ec-4d3a-be76-d1ecc74362d0",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Focus",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
