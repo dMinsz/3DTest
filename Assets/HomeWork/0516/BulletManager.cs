@@ -29,15 +29,21 @@ public class BulletManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        gameObject.SetActive(false);
-
+        //폭파 파티클시스템
+        Instantiate(ExplosionEffect, transform.position, transform.rotation); // 자동삭제되게해두었음
+        
+        //gameObject.SetActive(false);
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<BoxCollider>().enabled = false;
         var audio = GetComponent<AudioSource>();
+
+        var wait = audio.clip.length;
         audio.clip = ExplosiveSound;
+
+        wait += audio.clip.length;
+        
         audio.Play();
-
-
-        var obj = Instantiate(ExplosionEffect, transform.position, transform.rotation);
-        Destroy(obj, 1f);
-        Destroy(gameObject,2f);     
+        
+        Destroy(gameObject , wait);     
     }
 }
