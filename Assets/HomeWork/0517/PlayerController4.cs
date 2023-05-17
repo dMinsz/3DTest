@@ -114,12 +114,17 @@ public class PlayerController4: MonoBehaviour
         jump();
     }
 
-    private void OnFire(InputValue input) 
+    public void Fire() 
     {
         ani.SetTrigger("FireTrigger");
 
         Transform shoot = transform.Find("Tank").Find("TankRenderers").Find("TankTurret").Find("ShootPosition");
-        GameObject obj = Instantiate(BulletFrepab, shoot.position , shoot.rotation);
+        GameObject obj = Instantiate(BulletFrepab, shoot.position, shoot.rotation);
+    }
+
+    private void OnFire(InputValue input) 
+    {
+        Fire();
     }
 
     private void OnRepeatFire(InputValue input) 
