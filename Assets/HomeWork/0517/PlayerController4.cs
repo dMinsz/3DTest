@@ -81,7 +81,7 @@ public class PlayerController4: MonoBehaviour
 
     private void Move()
     {
-        transform.Translate(Vector3.forward* moveDir.z * Time.deltaTime * MovePower); // 위와 같다.
+        transform.Translate(Vector3.forward* moveDir.z * Time.deltaTime * MovePower); 
     }
 
     private void jump() 
