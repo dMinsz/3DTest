@@ -38,6 +38,9 @@ public class PlayerController4: MonoBehaviour
     [SerializeField] private float MouseSensitive = 0.5f;
     [SerializeField] private bool InvertVertical = true;
 
+
+    private Animator ani;
+
     private Vector3 orgBackCam;
     private bool ChangeCam = false;
     IEnumerator FireRoutine()
@@ -66,6 +69,7 @@ public class PlayerController4: MonoBehaviour
     {
         //camera = GetComponent<Camera>();
         rgd = GetComponent<Rigidbody>();
+        ani = GetComponent<Animator>();
 
     }
 
@@ -84,6 +88,7 @@ public class PlayerController4: MonoBehaviour
     {
         if (state != STATE.Jump) //&& state != STATE.Move) // 점프 , 움직이는 중에는 점프 불가
         {
+            ani.SetTrigger("JumpTrigger");
             rgd.AddForce(Vector3.up * JumpPower, ForceMode.Impulse);
             state = STATE.Jump;
         }
@@ -111,14 +116,18 @@ public class PlayerController4: MonoBehaviour
 
     private void OnFire(InputValue input) 
     {
+        ani.SetTrigger("FireTrigger");
+
         Transform shoot = transform.Find("Tank").Find("TankRenderers").Find("TankTurret").Find("ShootPosition");
         GameObject obj = Instantiate(BulletFrepab, shoot.position , shoot.rotation);
     }
 
     private void OnRepeatFire(InputValue input) 
     {
+
         if (input.isPressed)
         {
+            ani.SetTrigger("FireTrigger");
             CoroutineStart();
         }
         else 
@@ -128,24 +137,7 @@ public class PlayerController4: MonoBehaviour
     }
 
     private void OnFocus(InputValue input)
-    {
-        //if (!ChangeCam)
-        //{
-        //    Transform shot = transform.Find("ShotPos").transform;
-        //    Camera cam = transform.Find("BackCamera").GetComponent<Camera>();
-        //    orgBackCam = cam.transform.localPosition;
-        //    cam.transform.localPosition = shot.localPosition;
-        //    ChangeCam = true;
-
-        //}
-        //else 
-        //{
-        //    //Transform shot = transform.Find("ShotPos").transform;
-        //    Camera cam = transform.Find("BackCamera").GetComponent<Camera>();
-        //    cam.transform.localPosition = orgBackCam;
-        //    ChangeCam = false;
-
-        //}
+    {        
         if (!ChangeCam)
         {
             var BackCam = transform.Find("BackCam").GetComponent<CinemachineVirtualCamera>();
@@ -166,16 +158,17 @@ public class PlayerController4: MonoBehaviour
     {
 
         var deltaMouse = new Vector2(input.Get<Vector2>().x, input.Get<Vector2>().y);
-        deltaMouse.x %= 1920 * MouseSensitive;
+        deltaMouse.x %= Screen.width; // 스크린 width 값으로 마우스 델타 값을 좀 줄여준다.
 
-        float middle = 1920f / 2f;
+        float middle = Screen.width / 2f; // 스크린 가운데 를 구해서
 
-        float offset =  deltaMouse.x - middle;
-      
+        float offset =  deltaMouse.x - middle; // offset을 줘서  마우스의 이동을 좀 휙휙 안돌아가게 바꾼다.
+        offset *= MouseSensitive;
+
         Vector2 deltaRotation = deltaMouse;
-        deltaRotation.x *= InvertVertical ? 1.0f : -1.0f;
+        deltaRotation.x *= InvertVertical ? 1.0f : -1.0f; // 좌우 반전 필요시 사용가능
 
-        offset = Mathf.Clamp(offset, -140.0f, 140.0f);
+        offset = Mathf.Clamp(offset, -140.0f, 140.0f); // -140도 140도 만 돌게
 
 
         tankTurret.transform.localRotation = Quaternion.Euler(0f, offset, 0f);
