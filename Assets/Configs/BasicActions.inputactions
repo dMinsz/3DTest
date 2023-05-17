@@ -43,9 +43,9 @@
                 },
                 {
                     "name": "RotateTurret",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "8d1b8cb1-0d56-4779-b52f-e50076afb0c7",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -215,34 +215,23 @@
                 },
                 {
                     "name": "",
-                    "id": "5f62421a-a89b-4b0c-a0e7-f64271786b2b",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RotateTurret",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7a3e987b-a64a-48fa-b0df-66296dde82aa",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RotateTurret",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "481c2dcc-93ec-4d3a-be76-d1ecc74362d0",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Focus",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "46ff5f22-9d01-4056-8323-bc59f7d2fd0f",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateTurret",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

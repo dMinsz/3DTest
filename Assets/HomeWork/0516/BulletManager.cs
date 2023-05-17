@@ -38,6 +38,6 @@ public class BulletManager : MonoBehaviour
 
         var obj = Instantiate(ExplosionEffect, transform.position, transform.rotation);
         Destroy(obj, 1f);
-        Destroy(gameObject,1f);     
+        Destroy(gameObject,2f);     
     }
 }

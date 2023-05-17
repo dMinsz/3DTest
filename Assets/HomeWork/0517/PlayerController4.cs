@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -33,6 +34,9 @@ public class PlayerController4: MonoBehaviour
     public float RotatePower = 60.0f;
     public float JumpPower = 5.0f;
     public float RepeatTime = 1.0f;
+
+    [SerializeField] private float MouseSensitive = 0.5f;
+    [SerializeField] private bool InvertVertical = true;
 
     private Vector3 orgBackCam;
     private bool ChangeCam = false;
@@ -160,6 +164,21 @@ public class PlayerController4: MonoBehaviour
 
     private void OnRotateTurret(InputValue input)
     {
+
+        var deltaMouse = new Vector2(input.Get<Vector2>().x, input.Get<Vector2>().y);
+        deltaMouse.x %= 1920 * MouseSensitive;
+
+        float middle = 1920f / 2f;
+
+        float offset =  deltaMouse.x - middle;
+      
+        Vector2 deltaRotation = deltaMouse;
+        deltaRotation.x *= InvertVertical ? 1.0f : -1.0f;
+
+        offset = Mathf.Clamp(offset, -140.0f, 140.0f);
+
+
+        tankTurret.transform.localRotation = Quaternion.Euler(0f, offset, 0f);
     }
 
 
