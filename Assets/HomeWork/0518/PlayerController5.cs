@@ -26,7 +26,7 @@ public class PlayerController5: MonoBehaviour
     public UnityEvent<Vector3> OnMoved;
     public UnityEvent OnFired;
     public UnityEvent<bool> OnRepeatFired;
-    //public UnityEvent<Vector2> OnRotated;
+    public UnityEvent OnFocused;
     public UnityEvent<Vector2> OnRotatedTurret;
     public UnityEvent OnJumped;
 
@@ -48,14 +48,10 @@ public class PlayerController5: MonoBehaviour
         //OnRotated?.Invoke(inputDir);
     }
 
-    //private void OnRotate(InputValue value) 
-    //{
-    //    Vector2 inputDir = new Vector2();
-    //    inputDir.x = value.Get<Vector2>().x;
-    //    inputDir.y = value.Get<Vector2>().y;
-
-    //    OnRotated?.Invoke(inputDir);
-    //}
+    private void OnFocus() 
+    {
+        OnFocused?.Invoke();
+    }
 
     private void OnFire()
     {

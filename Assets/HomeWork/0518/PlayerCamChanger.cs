@@ -11,7 +11,7 @@ public class PlayerCamChanger : MonoBehaviour
     private bool ChangeCam = false;
 
 
-    private void Focus()
+    public void Focus()
     {
         if (!ChangeCam)
         {
